@@ -16,6 +16,7 @@ class tab2ViewModel @Inject constructor( private val repositori:Tab2Repositori) 
 
     val customerDocument = MutableLiveData<CustomersEntity>()
     val listPhone = MutableLiveData<CustomersPhoneEntity>()
+    val editCustomers = MutableLiveData<Boolean>()
 
     fun getCustomerDocument(document: String) {
         viewModelScope.launch (Dispatchers.IO){
@@ -32,22 +33,26 @@ class tab2ViewModel @Inject constructor( private val repositori:Tab2Repositori) 
 
     fun updateCustomers(name: String, cid: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            repositori.updateCustomer(name,cid)
+            val edit = repositori.updateCustomer(name,cid)
+            editCustomers.postValue(edit)
         }
     }
     fun updateName2Customers(name2: String, cid: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            repositori.updateName2Customer(name2,cid)
+            val edit = repositori.updateName2Customer(name2,cid)
+            editCustomers.postValue(edit)
         }
     }
     fun updateApellidoCustomers(apellido: String, cid: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            repositori.updateApellidoCustomer(apellido,cid)
+            val edit = repositori.updateApellidoCustomer(apellido,cid)
+            editCustomers.postValue(edit)
         }
     }
     fun updateApellido2Customers(apellido2:String, cid: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            repositori.updateApellido2Customer(apellido2,cid)
+            val edit = repositori.updateApellido2Customer(apellido2,cid)
+            editCustomers.postValue(edit)
         }
     }
 

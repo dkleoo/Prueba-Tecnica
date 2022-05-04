@@ -56,11 +56,21 @@ class Tab2 : AppCompatActivity() {
 
     fun oberver(){
 
+        viewModel.succesInsert.observe(this){
+            val document = binding.cDocument.text.toString()
+            if(it){
+                Toast.makeText(applicationContext,"El cliente con el numero de documento ${document} Registrado Correctamente",Toast.LENGTH_SHORT).show()
+                val i = Intent(this,Tab1::class.java)
+                val date = intent.extras?.get("id").toString()
+                i.putExtra("id",date)
+                startActivity(i)
+            }
+        }
+
 
         viewModel.customerDocument.observe(this){
             val date = intent.extras?.get("id").toString()
             if(it == null){
-
                 val document = binding.cDocument.text.toString()
                 val name = binding.cName.text.toString()
                 val name2 = binding.cNameLast.text.toString()
@@ -68,7 +78,6 @@ class Tab2 : AppCompatActivity() {
                 val apellido2 = binding.cLastName2.text.toString()
 
                 viewModel.InsertCustomer(date,document,name,name2,apellido,apellido2)
-                Toast.makeText(applicationContext,"El cliente con el numero de documento ${document} Registrado Correctamente",Toast.LENGTH_SHORT).show()
                 viewModel.insertLog("El cliente con el numero de documento ${document} Registrado Correctamente")
             }else{
                 Toast.makeText(applicationContext,"El cliente con el numero de documento ${it.cDocument} ya se encuentra registrado",Toast.LENGTH_SHORT).show()

@@ -29,11 +29,9 @@ class CustomerRepositori @Inject constructor(private val db: CustomersDatabase) 
         name2: String,
         apellido: String,
         apellido2: String
-    ) {
-         withContext(Dispatchers.IO) {
-            val customer = db.getCustomerDao().insertAll(CustomersEntity(0, date.toInt(), document.toInt(), name, name2, apellido, apellido2, 0))
-            customer
-        }
+    ): Boolean {
+        db.getCustomerDao().insertAll(CustomersEntity(0, date.toInt(), document.toInt(), name, name2, apellido, apellido2, 0))
+        return true
     }
 
     suspend fun getDocumentCustomer(document: String):CustomersEntity {

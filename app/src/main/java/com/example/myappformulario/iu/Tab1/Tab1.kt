@@ -23,6 +23,7 @@ class Tab1 : AppCompatActivity() {
         binding = ActivityTab1Binding.inflate(layoutInflater)
         setContentView(binding.root)
         observers()
+        inicialite()
     }
 
     override fun onPause() {
@@ -30,10 +31,6 @@ class Tab1 : AppCompatActivity() {
         super.onPause()
     }
 
-    override fun onStart() {
-        inicialite()
-        super.onStart()
-    }
 
     private fun inicialite() {
         var date = intent.extras?.get("id").toString()

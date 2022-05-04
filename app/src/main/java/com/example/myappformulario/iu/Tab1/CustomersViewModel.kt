@@ -14,6 +14,7 @@ class CustomersViewModel @Inject constructor(private val repositori: CustomerRep
 
     val listCustomers = MutableLiveData<List<CustomersEntity>>()
     val customerDocument = MutableLiveData<CustomersEntity>()
+    val succesInsert = MutableLiveData<Boolean>()
 
     fun getListcustomers(id: String) {
         viewModelScope.launch {
@@ -31,7 +32,8 @@ class CustomersViewModel @Inject constructor(private val repositori: CustomerRep
         apellido2: String
     ) {
         viewModelScope.launch {
-            repositori.insertCustomers(date, document, name, name2, apellido, apellido2)
+            val sucess = repositori.insertCustomers(date, document, name, name2, apellido, apellido2)
+            succesInsert.postValue(sucess)
         }
     }
 
